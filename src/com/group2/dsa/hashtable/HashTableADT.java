@@ -12,17 +12,21 @@ public interface HashTableADT<K, V> extends Iterable<K> {
     // O(1)
     int hashFunction(int hashedKey);
 
-    // O(n) : n = size of table
+    // O(n)
     void clear();
 
-    // 
+    // O(n)
     boolean has(K key);
 
+    // O(n)
     V insert(K key, V value);
 
+    // O(n)
     V get(K key);
 
+    // O(n)
     V remove(K key);
 
-    DoublyLinkedList<Node<K,V>> values();
+    // O(n)
+    DoublyLinkedList<V> values();
 }

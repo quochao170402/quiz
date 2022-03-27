@@ -46,15 +46,16 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
         return (int) ((hashedKey & 0xFFFFFFFFFL) % capacity);
     }
 
+    // Clear all doubly linked list
     @Override
     public void clear() {
         for (int i = 0; i < capacity; i++) {
             table[i].clear();
         }
-        // Arrays.fill(table, null);
         size = 0;
     }
 
+    // Check table constain key
     @Override
     public boolean has(K key) {
         int index = hashFunction(key.hashCode());
@@ -100,6 +101,7 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
         }
     }
 
+    // Add new node to a bucket in table (Bucket is a linkedlist at index by hashFunction returned)
     private V addNodeToBucket(K key, V value, DoublyLinkedList<Node<K, V>> linkedList) {
         linkedList.add(new Node<>(key, value));
         size++;
@@ -171,14 +173,16 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
     }
 
     @Override
-    public DoublyLinkedList<Node<K, V>> values() {
-        DoublyLinkedList<Node<K,V>> allValues = new DoublyLinkedListImpl<>();
+    public DoublyLinkedList<V> values() {
+        DoublyLinkedList<V> allValues = new DoublyLinkedListImpl<>();
 
         for(int i=0;i<table.length;i++){
             DoublyLinkedList<Node<K,V>> linkedList = table[i];
 
             if(linkedList!=null && !linkedList.isEmpty()) {
-                allValues.addAll(linkedList);
+                for (Node<K,V> node : linkedList) {
+                    allValues.add(node.getValue());
+                }
             }
         }
         return allValues;
