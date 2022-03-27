@@ -18,13 +18,13 @@ public class Test {
     }
 
     private static void testSeparateChaining() {
-        HashTableADT<Integer, Integer> hashtable = new HashTableImpl<>(MOD);
+        HashTableADT<Integer, Integer> hashtable = new HashTableImpl<>();
         for (int i = 0; i < NUMBER_OF_KEYS; i++) {
             hashtable.insert(keys[i], values[i]);
             int value = hashtable.get(keys[i]);
             if (value != values[i])
                 System.out.println("Code lai di ma");
         }
-        System.out.println(hashtable);
+        System.out.println(hashtable.values());
     }
 }

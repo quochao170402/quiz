@@ -254,4 +254,13 @@ public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
             return sb.toString();
         }
     }
+
+    @Override
+    public void addAll(DoublyLinkedList<T> other) {
+        if(other==null || other.isEmpty()) return;
+       
+        for (T t : other) {
+            add(t);
+        }  
+    }
 }

@@ -1,11 +1,20 @@
+import java.util.List;
 
+import com.group2.models.Category;
 
 /**
  * Hello world!
- *
  */
+
 public class App {
     public static void main(String[] args) {
-        System.out.println("Group 2 - Quiz Game");
+        List.of(
+                new Category("name"),
+                new Category("name"),
+                new Category("name"),
+                new Category("name"),
+                new Category("name"),
+                new Category("name")).forEach(System.out::println);
+
     }
 }

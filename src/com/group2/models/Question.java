@@ -6,7 +6,7 @@ public class Question {
     private Integer id;
     private Integer categoryId;
     private String content, answerA, answerB, answerC, answerD, correctAnswer;
-    private static Integer idAutoIncrement = 0;
+    private static Integer idAutoIncrement = 1;
 
     public Question() {
         this.id = idAutoIncrement++;

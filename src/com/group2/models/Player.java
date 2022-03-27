@@ -9,7 +9,7 @@ public class Player {
     private Integer score;
     private Long time;
     private Date date;
-    private static Integer idAutoIncrement = 0;
+    private static Integer idAutoIncrement = 1;
 
     public Player() {
         this.id = idAutoIncrement++;
@@ -40,7 +40,7 @@ public class Player {
         this.date = date;
     }
 
-    public static int getIdAutoIncrement(){
+    public static int getIdAutoIncrement() {
         return idAutoIncrement;
     }
 
@@ -50,11 +50,6 @@ public class Player {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public Player date(Date date) {
-        setDate(date);
-        return this;
     }
 
     public Integer getId() {
@@ -89,26 +84,6 @@ public class Player {
         this.time = time;
     }
 
-    public Player id(Integer id) {
-        setId(id);
-        return this;
-    }
-
-    public Player name(String name) {
-        setName(name);
-        return this;
-    }
-
-    public Player score(Integer score) {
-        setScore(score);
-        return this;
-    }
-
-    public Player time(Long time) {
-        setTime(time);
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -133,6 +108,7 @@ public class Player {
                 ", name='" + getName() + "'" +
                 ", score='" + getScore() + "'" +
                 ", time='" + getTime() + "'" +
+                ", date='" + getDate() + "'" +
                 "}";
     }
 

@@ -20,6 +20,9 @@ public interface DoublyLinkedList<T> extends Iterable<T> {
     // O(1)
     void addLast(T element);
 
+    // O(n)
+    void addAll(DoublyLinkedList<T> other);
+
     // O(1)
     T peekFirst();
 

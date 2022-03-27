@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Category {
     private Integer id;
     private String name;
-    private static Integer idAutoIncrement = 0;
+    private static Integer idAutoIncrement = 1;
 
     public Category() {
     }

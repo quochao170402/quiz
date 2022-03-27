@@ -76,18 +76,18 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
         DoublyLinkedList<Node<K, V>> linkedList = table[index];
 
         if (linkedList == null) {
-            // Case 1: key does not exist in the table => bucket of the table at index is
-            // null
+            // Key does not exist in the table => bucket of the table at index is null
             table[index] = linkedList = new DoublyLinkedListImpl<>();
             return addNodeToBucket(key, value, linkedList);
 
         } else if (linkedList.isEmpty()) {
-            // Case 2: key existed in the table but bucket is empty
+            // Key existed in the table but bucket is empty
             return addNodeToBucket(key, value, linkedList);
 
         } else {
-            // Case 3 : Key existed and bucket at index have nodes
+            // Key existed and bucket at index have nodes
             for (Node<K, V> node : linkedList) {
+                
                 // Node existed in bucket to return existed node
                 if (node.getKey().equals(key)) {
                     V oldValue = node.getValue();
@@ -171,6 +171,20 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
     }
 
     @Override
+    public DoublyLinkedList<Node<K, V>> values() {
+        DoublyLinkedList<Node<K,V>> allValues = new DoublyLinkedListImpl<>();
+
+        for(int i=0;i<table.length;i++){
+            DoublyLinkedList<Node<K,V>> linkedList = table[i];
+
+            if(linkedList!=null && !linkedList.isEmpty()) {
+                allValues.addAll(linkedList);
+            }
+        }
+        return allValues;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Hash Table :{\n");
@@ -178,6 +192,7 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
             sb.append("Table["+i+"]:\t");
             DoublyLinkedList<Node<K, V>> linkedList = table[i];
             if (linkedList == null || linkedList.isEmpty()) {
+                sb.append("\n");
                 continue;
             }
 
@@ -189,5 +204,7 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
         sb.append("}\n");
         return sb.toString();
     }
+
+    
 
 }
