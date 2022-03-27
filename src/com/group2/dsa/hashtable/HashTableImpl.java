@@ -1,10 +1,10 @@
-package com.group2.datastructures.hashtable;
+package com.group2.dsa.hashtable;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
-import com.group2.datastructures.linkedlist.DoublyLinkedList;
-import com.group2.datastructures.linkedlist.DoublyLinkedListImpl;
+import com.group2.dsa.linkedlist.DoublyLinkedList;
+import com.group2.dsa.linkedlist.DoublyLinkedListImpl;
 
 
 public class HashTableImpl<K, V> implements HashTableADT<K, V> {

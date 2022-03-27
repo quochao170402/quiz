@@ -1,4 +1,4 @@
-package com.group2.datastructures.hashtable;
+package com.group2.dsa.hashtable;
 
 import java.util.Random;
 

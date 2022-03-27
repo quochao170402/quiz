@@ -1,6 +1,6 @@
-package com.group2.datastructures.hashtable;
+package com.group2.dsa.hashtable;
 
-import com.group2.datastructures.linkedlist.DoublyLinkedList;
+import com.group2.dsa.linkedlist.DoublyLinkedList;
 
 public interface HashTableADT<K, V> extends Iterable<K> {
     // O(1)

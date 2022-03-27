@@ -1,4 +1,4 @@
-package com.group2.datastructures.linkedlist;
+package com.group2.dsa.linkedlist;
 
 public interface DoublyLinkedList<T> extends Iterable<T> {
 
