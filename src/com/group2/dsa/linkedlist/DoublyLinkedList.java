@@ -2,6 +2,10 @@ package com.group2.dsa.linkedlist;
 
 public interface DoublyLinkedList<T> extends Iterable<T> {
 
+    Node<T> getHead();
+
+    Node<T> getTail();
+
     // O(n)
     void clear();
 

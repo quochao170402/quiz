@@ -7,6 +7,22 @@ public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
     private Node<T> head = null;
     private Node<T> tail = null;
 
+    public Node<T> getHead() {
+        return this.head;
+    }
+
+    public void setHead(Node<T> head) {
+        this.head = head;
+    }
+
+    public Node<T> getTail() {
+        return this.tail;
+    }
+
+    public void setTail(Node<T> tail) {
+        this.tail = tail;
+    }
+
     @Override
     public void clear() {
         Node<T> currentNode = head;
@@ -240,27 +256,28 @@ public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
             return "[]";
         else {
             StringBuilder sb = new StringBuilder(size);
-            sb.append("[ ");
+            sb.append("[\n");
 
             Node<T> currentNode = head;
 
             while (currentNode != null) {
                 sb.append(currentNode.getData());
                 if (currentNode.getNext() != null)
-                    sb.append(", ");
+                    sb.append("\n");
                 currentNode = currentNode.getNext();
             }
-            sb.append(" ]");
+            sb.append("\n]");
             return sb.toString();
         }
     }
 
     @Override
     public void addAll(DoublyLinkedList<T> other) {
-        if(other==null || other.isEmpty()) return;
-       
-        for (T t : other) {
-            add(t);
-        }  
+        if (other == null || other.isEmpty())
+            return;
+            
+        this.tail.setNext(other.getHead());
+        this.tail = other.getTail();
     }
+
 }

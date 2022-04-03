@@ -6,7 +6,6 @@ import java.util.Iterator;
 import com.group2.dsa.linkedlist.DoublyLinkedList;
 import com.group2.dsa.linkedlist.DoublyLinkedListImpl;
 
-
 public class HashTableImpl<K, V> implements HashTableADT<K, V> {
     // Default size of table
     private static final int DEFAULT_CAPACITY = 10;
@@ -14,7 +13,6 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
     private int size = 0;
     // Size of table
     private int capacity;
-
 
     private DoublyLinkedList<Node<K, V>>[] table;
 
@@ -24,7 +22,7 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
 
     public HashTableImpl(int capacity) {
         if (capacity < 0)
-        throw new IllegalArgumentException("Capacity can not negative");
+            throw new IllegalArgumentException("Capacity can not negative");
 
         this.capacity = capacity;
         table = new DoublyLinkedListImpl[capacity];
@@ -88,7 +86,7 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
         } else {
             // Key existed and bucket at index have nodes
             for (Node<K, V> node : linkedList) {
-                
+
                 // Node existed in bucket to return existed node
                 if (node.getKey().equals(key)) {
                     V oldValue = node.getValue();
@@ -101,7 +99,8 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
         }
     }
 
-    // Add new node to a bucket in table (Bucket is a linkedlist at index by hashFunction returned)
+    // Add new node to a bucket in table (Bucket is a linkedlist at index by
+    // hashFunction returned)
     private V addNodeToBucket(K key, V value, DoublyLinkedList<Node<K, V>> linkedList) {
         linkedList.add(new Node<>(key, value));
         size++;
@@ -152,11 +151,12 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
 
             @Override
             public boolean hasNext() {
-                if(elementCount != size()) throw new ConcurrentModificationException("Table bi doi mat tieu luonnnnnn!");
+                if (elementCount != size())
+                    throw new ConcurrentModificationException("Table bi doi mat tieu luonnnnnn!");
 
-                if(bucketIterator == null || !bucketIterator.hasNext()) {
-                    while(++index < capacity) {
-                        if(table[index] != null || !table[index].isEmpty() ) {
+                if (bucketIterator == null || !bucketIterator.hasNext()) {
+                    while (++index < capacity) {
+                        if (table[index] != null || !table[index].isEmpty()) {
                             bucketIterator = table[index].iterator();
                             break;
                         }
@@ -176,13 +176,14 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
     public DoublyLinkedList<V> values() {
         DoublyLinkedList<V> allValues = new DoublyLinkedListImpl<>();
 
-        for(int i=0;i<table.length;i++){
-            DoublyLinkedList<Node<K,V>> linkedList = table[i];
+        for (int i = 0; i < table.length; i++) {
+            DoublyLinkedList<Node<K, V>> linkedList = table[i];
 
-            if(linkedList!=null && !linkedList.isEmpty()) {
-                for (Node<K,V> node : linkedList) {
+            if (linkedList != null && !linkedList.isEmpty()) {
+                for (Node<K, V> node : linkedList) {
                     allValues.add(node.getValue());
                 }
+                // allValues.addAll(linkedList);
             }
         }
         return allValues;
@@ -193,7 +194,7 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
         StringBuilder sb = new StringBuilder();
         sb.append("Hash Table :{\n");
         for (int i = 0; i < table.length; i++) {
-            sb.append("Table["+i+"]:\t");
+            sb.append("Table[" + i + "]:\t");
             DoublyLinkedList<Node<K, V>> linkedList = table[i];
             if (linkedList == null || linkedList.isEmpty()) {
                 sb.append("\n");
@@ -208,7 +209,5 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
         sb.append("}\n");
         return sb.toString();
     }
-
-    
 
 }

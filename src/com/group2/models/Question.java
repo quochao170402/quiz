@@ -5,7 +5,8 @@ import java.util.Objects;
 public class Question {
     private Integer id;
     private Integer categoryId;
-    private String content, answerA, answerB, answerC, answerD, correctAnswer;
+    private String content, answerA, answerB, answerC, answerD;
+    private Integer correctAnswer;
     private static Integer idAutoIncrement = 1;
 
     public Question() {
@@ -13,7 +14,7 @@ public class Question {
     }
 
     public Question(Integer categoryId, String content, String answerA, String answerB, String answerC, String answerD,
-            String correctAnswer) {
+            Integer correctAnswer) {
         this.id = idAutoIncrement++;
         this.categoryId = categoryId;
         this.content = content;
@@ -25,7 +26,7 @@ public class Question {
     }
 
     public Question(Integer id, Integer categoryId, String content, String answerA, String answerB, String answerC,
-            String answerD, String correctAnswer) {
+            String answerD, Integer correctAnswer) {
         this.id = id;
         this.categoryId = categoryId;
         this.content = content;
@@ -96,11 +97,11 @@ public class Question {
         this.answerD = answerD;
     }
 
-    public String getCorrectAnswer() {
+    public Integer getCorrectAnswer() {
         return this.correctAnswer;
     }
 
-    public void setCorrectAnswer(String correctAnswer) {
+    public void setCorrectAnswer(Integer correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
 
@@ -131,6 +132,14 @@ public class Question {
                 ", answerD='" + getAnswerD() + "'" +
                 ", correctAnswer='" + getCorrectAnswer() + "'" +
                 "}";
+    }
+
+    public String display() {
+        return getContent() + "\n" +
+                "1. " + getAnswerA() + "\n" +
+                "2. " + getAnswerB() + "\n" +
+                "3. " + getAnswerC() + "\n" +
+                "4. " + getAnswerD() + "\n";
     }
 
 }
