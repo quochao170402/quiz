@@ -8,7 +8,7 @@ import com.group2.dsa.linkedlist.DoublyLinkedListImpl;
 
 
 public class HashTableImpl<K, V> implements HashTableADT<K, V> {
-    // default size of table
+    // Default size of table
     private static final int DEFAULT_CAPACITY = 10;
     // Size of hash table
     private int size = 0;

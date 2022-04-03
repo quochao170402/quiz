@@ -12,7 +12,7 @@ public interface HashTableADT<K, V> extends Iterable<K> {
     // O(1)
     int hashFunction(int hashedKey);
 
-    // O(n)
+    // O(n^2) ??? 
     void clear();
 
     // O(n)
