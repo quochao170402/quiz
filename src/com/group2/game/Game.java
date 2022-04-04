@@ -26,6 +26,7 @@ public class Game {
         game.play();
         System.out.println(game.players.values());
         game.scan.close();
+        
     }
 
     private void initData() {
@@ -102,4 +103,11 @@ public class Game {
         players.insert(player.getId(), player);
         System.out.println(player);
     }
+    
+
 }
+
+    
+
+
+

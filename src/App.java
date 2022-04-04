@@ -8,13 +8,6 @@ import com.group2.models.Category;
 
 public class App {
     public static void main(String[] args) {
-        List.of(
-                new Category("name"),
-                new Category("name"),
-                new Category("name"),
-                new Category("name"),
-                new Category("name"),
-                new Category("name")).forEach(System.out::println);
-
+        
     }
 }
