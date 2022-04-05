@@ -11,7 +11,7 @@ import java.util.Random;
 import java.util.UUID;
 
 public class Demo {
-
+    
     public static final DoublyLinkedList<Category> categorys = new DoublyLinkedListImpl<>();
     public static final DoublyLinkedList<Question> questions = new DoublyLinkedListImpl<>();
     public static final DoublyLinkedList<Player> players = new DoublyLinkedListImpl<>();
@@ -34,7 +34,25 @@ public class Demo {
 
         return slow;
     }
-    
+    public static Node<Player> getMiddle2(Node<Player> headPlayer) {
+        
+        if(headPlayer == null) {
+            return headPlayer;
+        }
+
+        Node<Player> slow = headPlayer;
+        Node<Player> fast = headPlayer.getNext();
+        
+        while(fast.getNext() != null){
+            fast = fast.getNext();
+            if (fast.getNext() != null) {
+                fast = fast.getNext();
+                slow = slow.getNext();
+            }
+        }
+
+        return slow;
+    }
     public static Node<Player> sortedMerge(Node<Player> left, Node<Player> right) {
 
         Node<Player> result = null;
