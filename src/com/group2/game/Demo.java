@@ -15,6 +15,8 @@ public class Demo {
     public static final DoublyLinkedList<Category> categorys = new DoublyLinkedListImpl<>();
     public static final DoublyLinkedList<Question> questions = new DoublyLinkedListImpl<>();
     public static final DoublyLinkedList<Player> players = new DoublyLinkedListImpl<>();
+
+    // O(n)
     public static Node<Player> getMiddle(Node<Player> headPlayer) {
         
         if(headPlayer == null) {
@@ -35,7 +37,7 @@ public class Demo {
         return slow;
     }
     
-    public static Node<Player> sortedMerge(Node<Player> left, Node<Player> right) {
+    public static Node<Player> mergeSort(Node<Player> left, Node<Player> right) {
 
         Node<Player> result = null;
         if(left == null) {
@@ -50,22 +52,22 @@ public class Demo {
         if(temp1.getScore() > temp2.getScore()) {
             
             result = left;
-            result.setNext(sortedMerge(left.getNext(), right));
+            result.setNext(mergeSort(left.getNext(), right));
             
         }
         else if (temp1.getScore() == temp2.getScore()) {
             if(temp1.getTime() < temp2.getTime()) {
                 result = left;
-                result.setNext(sortedMerge(left.getNext(), right));
+                result.setNext(mergeSort(left.getNext(), right));
             }
             else {
                 result = right;
-                result.setNext(sortedMerge(left, right.getNext()));
+                result.setNext(mergeSort(left, right.getNext()));
             }
         }
         else {
             result = right;
-            result.setNext(sortedMerge(left, right.getNext()));
+            result.setNext(mergeSort(left, right.getNext()));
         }
 
 
@@ -90,7 +92,7 @@ public class Demo {
         Node<Player> right = mergeSort(nextofmiddle);
 
 
-        Node<Player> sortedlist = sortedMerge(left, right);
+        Node<Player> sortedlist = mergeSort(left, right);
         return sortedlist;
     }
     
