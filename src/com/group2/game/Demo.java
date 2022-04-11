@@ -36,31 +36,8 @@ public class Demo {
 
         return slow;
     }
-<<<<<<< HEAD
     
     public static Node<Player> mergeSort(Node<Player> left, Node<Player> right) {
-=======
-    public static Node<Player> getMiddle2(Node<Player> headPlayer) {
-        
-        if(headPlayer == null) {
-            return headPlayer;
-        }
-
-        Node<Player> slow = headPlayer;
-        Node<Player> fast = headPlayer.getNext();
-        
-        while(fast.getNext() != null){
-            fast = fast.getNext();
-            if (fast.getNext() != null) {
-                fast = fast.getNext();
-                slow = slow.getNext();
-            }
-        }
-
-        return slow;
-    }
-    public static Node<Player> sortedMerge(Node<Player> left, Node<Player> right) {
->>>>>>> 09aed12e5a6f0b48dbb4f69d92c74caed1da0c15
 
         Node<Player> result = null;
         if(left == null) {
