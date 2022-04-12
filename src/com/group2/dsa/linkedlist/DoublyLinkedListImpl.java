@@ -280,4 +280,10 @@ public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
         this.tail = other.getTail();
     }
 
+    @Override
+    public char[] display() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }
