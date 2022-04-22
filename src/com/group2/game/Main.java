@@ -12,11 +12,13 @@ import com.group2.dsa.linkedlist.Node;
 import com.group2.models.Category;
 import com.group2.models.Player;
 import com.group2.models.Question;
+import com.group2.utils.GameUtils;
 
 public class Main {
     private HashTableADT<Integer, Question> questions = new HashTableImpl<>(97);
     private HashTableADT<Integer, Category> categories = new HashTableImpl<>(7);
     private HashTableADT<Integer, Player> players = new HashTableImpl<>();
+    private GameUtils gameUtils = new GameUtils();
     private Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -82,21 +84,27 @@ public class Main {
 
             switch (option) {
                 case 1:// Play game
-                    playGame();
+                    Player player = playGame();
+                    players.insert(player.getId(), player);
+                    System.out.println(player);
                     break;
 
                 case 2:// view rankings
                     DoublyLinkedList<Player> playerList = displayRankings();
-                    System.out.println("RANKINGs");
-                    playerList.display();
+                    System.out.println("RANKING");
+                    Node<Player> nodes = gameUtils.mergeSort(playerList.getHead());
+                    while (nodes != null) {
+                        System.out.println(nodes);
+                        nodes = nodes.getNext();
+                    }
                     break;
 
                 case 3:
-                    Player player = findRankingByPlayerName();
-                    if (player != null) {
+                    Player foundPlayer = findRankingByPlayerName();
+                    if (foundPlayer != null) {
 
-                        System.out.println("Rank of player " + player.getName() + ":");
-                        System.out.println(player);
+                        System.out.println("Rank of player " + foundPlayer.getName() + ":");
+                        System.out.println(foundPlayer);
                     } else {
                         System.out.println("NOT FOUND PLAYER");
                     }
@@ -332,7 +340,7 @@ public class Main {
         return linkedList;
     }
 
-    public boolean isNumber(String string) {
+    private boolean isNumber(String string) {
         if (string == null || string.isEmpty())
             return false;
         if (string.matches("\\d+")) {
@@ -341,13 +349,13 @@ public class Main {
         return false;
     }
 
-    public boolean isAnswer(int answer) {
+    private boolean isAnswer(int answer) {
         if (answer >= 1 && answer <= 4)
             return true;
         return false;
     }
 
-    public boolean isOption(int option) {
+    private boolean isOption(int option) {
         if (option >= 1 && option <= 10)
             return true;
         return false;
@@ -362,7 +370,7 @@ public class Main {
         return false;
     }
 
-    public void playGame() {
+    public Player playGame() {
         DoublyLinkedList<Question> listQuestion = randomQuestion(5);
         System.out.println("Enter your name: ");
         String name = scan.nextLine();
@@ -379,8 +387,15 @@ public class Main {
                 answer = scan.nextLine();
                 if (!isNumber(answer)) {
                     System.out.println("Your answer wrong! answer must be number.");
+                } else {
+                    if (!isAnswer(Integer.parseInt(answer))) {
+                        System.out.println("Answer must be in the range 1 - 4");
+                    } else {
+                        break;
+                    }
                 }
-            } while (!isNumber(answer));
+
+            } while (true);
             if (question.getCorrectAnswer() == Integer.parseInt(answer)) {
                 score += 10;
             }
@@ -390,7 +405,7 @@ public class Main {
         long time = end - start;
 
         Player player = new Player(name, score, time);
-        players.insert(player.getId(), player);
+        return player;
     }
 
 }
