@@ -54,5 +54,5 @@ public interface DoublyLinkedList<T> extends Iterable<T> {
     // O(n)
     boolean contains(Object object);
 
-    char[] display();
+    void display();
 }

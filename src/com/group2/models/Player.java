@@ -103,16 +103,8 @@ public class Player {
 
     @Override
     public String toString() {
-        return "{" +
-                " id='" + getId() + "'" +
-                ", name='" + getName() + "'" +
-                ", score='" + getScore() + "'" +
-                ", time='" + getTime() + "'" +
-                ", date='" + getDate() + "'" +
-                "}";
-    }
-
-    public void display() {
+        return "ID: " + this.id + "\tName: " + this.name + "\tScore: " + this.score + "\tTime: " + this.time
+                + "\tDate: " + this.date;
     }
 
 }

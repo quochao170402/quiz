@@ -275,15 +275,18 @@ public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
     public void addAll(DoublyLinkedList<T> other) {
         if (other == null || other.isEmpty())
             return;
-            
+
         this.tail.setNext(other.getHead());
         this.tail = other.getTail();
     }
 
     @Override
-    public char[] display() {
-        // TODO Auto-generated method stub
-        return null;
+    public void display() {
+        Node<T> node = head;
+        while (node != null) {
+            System.out.println(node.getData());
+            node = node.getNext();
+        }
     }
 
 }

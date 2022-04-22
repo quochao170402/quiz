@@ -26,6 +26,28 @@ public class Main {
 
     }
 
+    private void initData() {
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            Category category = new Category(UUID.randomUUID().toString());
+            categories.insert(category.getId(), category);
+        }
+
+        for (int i = 0; i < 200; i++) {
+            Question question = new Question(random.nextInt(10), UUID.randomUUID().toString(),
+                    UUID.randomUUID().toString(),
+                    UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(),
+                    random.nextInt(4) + 1);
+            questions.insert(question.getId(), question);
+        }
+
+        for (int i = 0; i < 20; i++) {
+            Player player = new Player(UUID.randomUUID().toString(), random.nextInt(10) * 10,
+                    (long) random.nextInt(1000000));
+            players.insert(player.getId(), player);
+        }
+    }
+
     public void menu() {
         System.out.println("QUIZ GAME");
         System.out.println("1. Play game.");
@@ -64,35 +86,58 @@ public class Main {
                     break;
 
                 case 2:// view rankings
-                    displayRankings();
+                    DoublyLinkedList<Player> playerList = displayRankings();
+                    System.out.println("RANKINGs");
+                    playerList.display();
                     break;
 
                 case 3:
-                    findRankingByPlayerName();
+                    Player player = findRankingByPlayerName();
+                    if (player != null) {
+
+                        System.out.println("Rank of player " + player.getName() + ":");
+                        System.out.println(player);
+                    } else {
+                        System.out.println("NOT FOUND PLAYER");
+                    }
                     break;
 
                 case 4:
-                    displayAllQuestions();
+                    DoublyLinkedList<Question> questionList = displayAllQuestions();
+                    System.out.println("ALL QUESTIONS");
+                    questionList.display();
                     break;
 
                 case 5:
-                    displayAllQuestionsByCategory();
+                    DoublyLinkedList<Question> questionListWithCategory = displayAllQuestionsByCategory();
+                    System.out.println("ALL QUESTION WITH CATEGORY ID "
+                            + questionListWithCategory.getHead().getData().getCategoryId());
+                    questionListWithCategory.display();
                     break;
 
                 case 6:
-                    findQuestionById();
+                    Question question = findQuestionById();
+                    if (question != null) {
+                        System.out.println("QUESTION WITH ID " + question.getId());
+                        System.out.println(question);
+                    } else {
+                        System.out.println("NOT FOUND QUESTION");
+                    }
                     break;
 
                 case 7:
                     addQuestion();
+                    System.out.println("ADD QUESTION SUCCESSFUL");
                     break;
 
                 case 8:
                     updateQuestion();
+                    System.out.println("UPDATE QUESTION SUCCESSFUL");
                     break;
 
                 case 9:
                     deleteQuestion();
+                    System.out.println("DELETE QUESTION SUCCESSFUL");
                     break;
                 case 10:
                 default:
@@ -100,12 +145,38 @@ public class Main {
                     System.out.println("Thank you!!! See you again.");
                     break;
             }
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
         } while (flag);
     }
 
-    private void displayAllQuestionsByCategory() {
+    private DoublyLinkedList<Question> displayAllQuestionsByCategory() {
+        DoublyLinkedList<Category> list = categories.values();
+        list.display();
+        System.out.println("Choose category id : ");
+        int id = -1;
+        do {
+            String str = scan.nextLine();
 
+            if (isNumber(str) && isCategoryId(Integer.parseInt(str), list)) {
+                id = Integer.parseInt(str);
+                break;
+            } else {
+                System.out.println("Invalid!!!Reinput");
+            }
+        } while (true);
+        DoublyLinkedList<Question> listQuestion = questions.values();
+        DoublyLinkedList<Question> result = new DoublyLinkedListImpl<>();
+        for (Question question : listQuestion) {
+            if (question.getCategoryId() == id) {
+                result.add(question);
+            }
+        }
+        return result;
     }
 
     private void deleteQuestion() {
@@ -198,7 +269,7 @@ public class Main {
 
     }
 
-    private void findQuestionById() {
+    private Question findQuestionById() {
         System.out.println("Enter question id; ");
         int id = 0;
 
@@ -214,25 +285,25 @@ public class Main {
 
         for (Question question : questions.values()) {
             if (question.getId().equals(id)) {
-                question.display();
-                return;
+                return question;
             }
         }
         System.out.println("Not found question with id " + id);
+        return null;
     }
 
-    private void displayAllQuestions() {
-        questions.values().display();
+    private DoublyLinkedList<Question> displayAllQuestions() {
+        return questions.values();
     }
 
-    private void findRankingByPlayerName() {
+    private Player findRankingByPlayerName() {
         System.out.println("Enter your name: ");
         String name = scan.nextLine();
         Player player = rankingByName(name);
         if (player == null) {
-            System.out.println("Not found Player");
+            return null;
         } else
-            player.display();
+            return player;
     }
 
     private Player rankingByName(String name) {
@@ -244,27 +315,12 @@ public class Main {
         return null;
     }
 
-    private void displayRankings() {
-        System.out.println(players.values().display());
+    private DoublyLinkedList<Player> displayRankings() {
+        return players.values();
     }
 
     // Generate random questions for the game.
     // Use java's random string generator to generate questions and answers
-    private void initData() {
-        Random random = new Random();
-        for (int i = 0; i < 10; i++) {
-            Category category = new Category(UUID.randomUUID().toString());
-            categories.insert(category.getId(), category);
-        }
-
-        for (int i = 0; i < 200; i++) {
-            Question question = new Question(random.nextInt(10), UUID.randomUUID().toString(),
-                    UUID.randomUUID().toString(),
-                    UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(),
-                    random.nextInt(4) + 1);
-            questions.insert(question.getId(), question);
-        }
-    }
 
     public DoublyLinkedList<Question> randomQuestion(int size) {
         int sizeOfTable = questions.size();
@@ -305,7 +361,6 @@ public class Main {
         }
         return false;
     }
-    
 
     public void playGame() {
         DoublyLinkedList<Question> listQuestion = randomQuestion(5);

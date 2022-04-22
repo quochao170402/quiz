@@ -121,17 +121,22 @@ public class Question {
         return Objects.hash(id, content, answerA, answerB, answerC, answerD, correctAnswer);
     }
 
+    public String getCorrectAnswer(int correctAnswer) {
+        if (correctAnswer == 1)
+            return "A";
+        else if (correctAnswer == 2)
+            return "B";
+        else if (correctAnswer == 3)
+            return "C";
+        else
+            return "D";
+    }
+
     @Override
     public String toString() {
-        return "{" +
-                " id='" + getId() + "'" +
-                ", content='" + getContent() + "'" +
-                ", answerA='" + getAnswerA() + "'" +
-                ", answerB='" + getAnswerB() + "'" +
-                ", answerC='" + getAnswerC() + "'" +
-                ", answerD='" + getAnswerD() + "'" +
-                ", correctAnswer='" + getCorrectAnswer() + "'" +
-                "}";
+        return "ID:" + this.id + "\tContent: " + this.content + "\tAnswer A: " + this.answerA + "\tAnswer B: "
+                + this.answerB + "\tAnswer C: " + this.answerC + "\tAnswer D: " + this.answerD + "\tCorrect anwser: "
+                + getCorrectAnswer(this.correctAnswer);
     }
 
     public String display() {

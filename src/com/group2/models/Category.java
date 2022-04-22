@@ -58,10 +58,7 @@ public class Category {
 
     @Override
     public String toString() {
-        return "{" +
-                " id='" + getId() + "'" +
-                ", name='" + getName() + "'" +
-                "}";
+        return "ID: " + this.id + "\tName: " + this.name;
     }
 
 }
