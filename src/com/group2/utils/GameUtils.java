@@ -49,21 +49,29 @@ public class GameUtils{
             
             result = left;
             result.setNext(mergeSort(left.getNext(), right));
+            result.getNext().setPrev(result);;
+
             
         }
         else if (temp1.getScore() == temp2.getScore()) {
             if(temp1.getTime() < temp2.getTime()) {
                 result = left;
                 result.setNext(mergeSort(left.getNext(), right));
+                result.getNext().setPrev(result);;
+
             }
             else {
                 result = right;
                 result.setNext(mergeSort(left, right.getNext()));
+                result.getNext().setPrev(result);;
+
             }
         }
         else {
             result = right;
             result.setNext(mergeSort(left, right.getNext()));
+            result.getNext().setPrev(result);;
+
         }
 
 
