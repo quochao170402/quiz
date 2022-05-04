@@ -29,25 +29,31 @@ public class Main {
     }
 
     private void initData() {
+        InitData initData = new InitData();
+        categories = initData.initCategories();
+        questions = initData.initQuestions();
         Random random = new Random();
-        for (int i = 0; i < 10; i++) {
-            Category category = new Category(UUID.randomUUID().toString());
-            categories.insert(category.getId(), category);
-        }
+        // for (int i = 0; i < 3; i++) {
+        // Category category = new Category(UUID.randomUUID().toString());
+        // categories.insert(category.getId(), category);
+        // }
 
-        for (int i = 0; i < 200; i++) {
-            Question question = new Question(random.nextInt(10), UUID.randomUUID().toString(),
-                    UUID.randomUUID().toString(),
-                    UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(),
-                    random.nextInt(4) + 1);
-            questions.insert(question.getId(), question);
-        }
+        // for (int i = 0; i < 20; i++) {
+        // Question question = new Question(random.nextInt(3),
+        // UUID.randomUUID().toString(),
+        // UUID.randomUUID().toString(),
+        // UUID.randomUUID().toString(), UUID.randomUUID().toString(),
+        // UUID.randomUUID().toString(),
+        // random.nextInt(4) + 1);
+        // questions.insert(question.getId(), question);
+        // }
 
-        for (int i = 0; i < 20; i++) {
-            Player player = new Player(UUID.randomUUID().toString(), random.nextInt(10) * 10,
-                    (long) random.nextInt(1000000));
-            players.insert(player.getId(), player);
-        }
+        // for (int i = 0; i < 50; i++) {
+        // Player player = new Player(UUID.randomUUID().toString(), random.nextInt(10) *
+        // 10,
+        // (long) random.nextInt(1000000));
+        // players.insert(player.getId(), player);
+        // }
     }
 
     public void menu() {
@@ -334,8 +340,13 @@ public class Main {
         int sizeOfTable = questions.size();
         DoublyLinkedList<Question> linkedList = new DoublyLinkedListImpl<>();
         Random random = new Random();
-        for (int i = 0; i < size; i++) {
-            linkedList.add(questions.get(random.nextInt(sizeOfTable)));
+        int temp = 0;
+        while (temp < size) {
+            Question question = questions.get(random.nextInt(sizeOfTable));
+            if (!linkedList.contains(question)) {
+                linkedList.add(question);
+                temp++;
+            }
         }
         return linkedList;
     }

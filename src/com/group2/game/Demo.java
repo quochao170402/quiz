@@ -108,17 +108,19 @@ public class Demo {
     }
     public static void main(String[] args) {
         initData();
-        System.out.println(categorys);
-        System.out.println(questions);
-        System.out.println(players);
-        showCharts();
+        // System.out.println(categorys);
+        // System.out.println(questions);
+        // System.out.println(players);
+        // showCharts();
+
+        
     }
 
     private static void initData() {
         Random random = new Random();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 30; i++) {
             categorys.add(new Category(UUID.randomUUID().toString()));
-            questions.add(new Question(random.nextInt(10), UUID.randomUUID().toString(), UUID.randomUUID().toString(),
+            questions.add(new Question(random.nextInt(30), UUID.randomUUID().toString(), UUID.randomUUID().toString(),
                     UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(),
                     random.nextInt(4) + 1));
             players.add(new Player(UUID.randomUUID().toString(), random.nextInt(10) * 10,
