@@ -35,7 +35,7 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
 
     @Override
     public boolean isEmpty() {
-        return size() == 0;
+        return size() == 0; 
     }
 
     // 0xFFFFFFFFFL is a bit operator to change a negative number to positive number
@@ -51,13 +51,15 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
             table[i].clear();
         }
         size = 0;
+
+        //O(n)
     }
 
     // Check table constain key
     @Override
     public boolean has(K key) {
         int index = hashFunction(key.hashCode());
-        DoublyLinkedList<Node<K, V>> linkedList = table[index];
+        DoublyLinkedList<Node<K, V>> linkedList = table[index]; 
 
         if (linkedList == null || linkedList.isEmpty())
             return false;
@@ -67,11 +69,11 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
                 return true;
         }
         return false;
-    }
+    } // O(n)
 
     @Override
     public V insert(K key, V value) {
-        int index = hashFunction(key.hashCode());
+        int index = hashFunction(key.hashCode()); 
         DoublyLinkedList<Node<K, V>> linkedList = table[index];
 
         if (linkedList == null) {

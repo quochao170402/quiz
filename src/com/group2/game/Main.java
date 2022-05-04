@@ -11,13 +11,13 @@ import com.group2.dsa.linkedlist.Node;
 import com.group2.models.Category;
 import com.group2.models.Player;
 import com.group2.models.Question;
-import com.group2.utils.Soter;
+import com.group2.utils.Sorter;
 
 public class Main {
     private HashTableADT<Integer, Question> questions = new HashTableImpl<>(97);
     private HashTableADT<Integer, Category> categories = new HashTableImpl<>(7);
     private HashTableADT<Integer, Player> players = new HashTableImpl<>();
-    private Soter gameUtils = new Soter();
+    private Sorter sorter = new Sorter();
     private Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -74,7 +74,6 @@ public class Main {
         boolean flag = true;
         int option = 0;
         do {
-
             // Player input and check input
             do {
                 menu();
@@ -97,7 +96,7 @@ public class Main {
                 case 2:// view rankings
                     DoublyLinkedList<Player> playerList = displayRankings();
                     System.out.println("RANKING");
-                    Node<Player> nodes = gameUtils.mergeSort(playerList.getHead());
+                    Node<Player> nodes = sorter.mergeSort(playerList.getHead());
                     while (nodes != null) {
                         System.out.println(nodes);
                         nodes = nodes.getNext();
@@ -107,7 +106,6 @@ public class Main {
                 case 3:
                     Player foundPlayer = findRankingByPlayerName();
                     if (foundPlayer != null) {
-
                         System.out.println("Rank of player " + foundPlayer.getName() + ":");
                         System.out.println(foundPlayer);
                     } else {
@@ -345,7 +343,6 @@ public class Main {
             if (!linkedList.contains(question) && question != null) {
                 linkedList.add(question);
                 temp++;
-                // System.out.println(question);
             }
         }
         return linkedList;
@@ -396,6 +393,7 @@ public class Main {
             do {
                 System.out.print("Your answser: ");
                 answer = scan.nextLine();
+                
                 if (!isNumber(answer)) {
                     System.out.println("Your answer wrong! answer must be number.");
                 } else {
@@ -407,6 +405,7 @@ public class Main {
                 }
 
             } while (true);
+
             if (question.getCorrectAnswer() == Integer.parseInt(answer)) {
                 score += 10;
             }

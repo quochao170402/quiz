@@ -7,7 +7,7 @@ import com.group2.models.Category;
 import com.group2.models.Player;
 import com.group2.models.Question;
 
-public class Soter{
+public class Sorter{
     public static final DoublyLinkedList<Category> categorys = new DoublyLinkedListImpl<>();
     public static final DoublyLinkedList<Question> questions = new DoublyLinkedListImpl<>();
     public static final DoublyLinkedList<Player> players = new DoublyLinkedListImpl<>();
@@ -33,22 +33,24 @@ public class Soter{
         return slow;
     }
     
-    public  Node<Player> mergeSort(Node<Player> left, Node<Player> right) {
+    public  Node<Player> merge(Node<Player> left, Node<Player> right) {
 
         Node<Player> result = null;
         if(left == null) {
             return right;
         }
+
         if(right == null) {
             return left;
         }
+
         Player temp1 = left.getData();
         Player temp2 = right.getData();
     
         if(temp1.getScore() > temp2.getScore()) {
             
             result = left;
-            result.setNext(mergeSort(left.getNext(), right));
+            result.setNext(merge(left.getNext(), right));
             result.getNext().setPrev(result);;
 
             
@@ -56,20 +58,18 @@ public class Soter{
         else if (temp1.getScore() == temp2.getScore()) {
             if(temp1.getTime() < temp2.getTime()) {
                 result = left;
-                result.setNext(mergeSort(left.getNext(), right));
+                result.setNext(merge(left.getNext(), right));
                 result.getNext().setPrev(result);;
-
             }
             else {
                 result = right;
-                result.setNext(mergeSort(left, right.getNext()));
+                result.setNext(merge(left, right.getNext()));
                 result.getNext().setPrev(result);;
-
             }
         }
         else {
             result = right;
-            result.setNext(mergeSort(left, right.getNext()));
+            result.setNext(merge(left, right.getNext()));
             result.getNext().setPrev(result);;
 
         }
@@ -96,7 +96,7 @@ public class Soter{
         Node<Player> right = mergeSort(nextofmiddle);
 
 
-        Node<Player> sortedlist = mergeSort(left, right);
+        Node<Player> sortedlist = merge(left, right);
         return sortedlist;
     }
     
