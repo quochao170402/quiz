@@ -7,7 +7,7 @@ import com.group2.models.Category;
 import com.group2.models.Player;
 import com.group2.models.Question;
 
-public class GameUtils{
+public class Soter{
     public static final DoublyLinkedList<Category> categorys = new DoublyLinkedListImpl<>();
     public static final DoublyLinkedList<Question> questions = new DoublyLinkedListImpl<>();
     public static final DoublyLinkedList<Player> players = new DoublyLinkedListImpl<>();

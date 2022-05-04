@@ -2,7 +2,6 @@ package com.group2.game;
 
 import java.util.Random;
 import java.util.Scanner;
-import java.util.UUID;
 
 import com.group2.dsa.hashtable.HashTableADT;
 import com.group2.dsa.hashtable.HashTableImpl;
@@ -12,13 +11,13 @@ import com.group2.dsa.linkedlist.Node;
 import com.group2.models.Category;
 import com.group2.models.Player;
 import com.group2.models.Question;
-import com.group2.utils.GameUtils;
+import com.group2.utils.Soter;
 
 public class Main {
     private HashTableADT<Integer, Question> questions = new HashTableImpl<>(97);
     private HashTableADT<Integer, Category> categories = new HashTableImpl<>(7);
     private HashTableADT<Integer, Player> players = new HashTableImpl<>();
-    private GameUtils gameUtils = new GameUtils();
+    private Soter gameUtils = new Soter();
     private Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -32,7 +31,7 @@ public class Main {
         InitData initData = new InitData();
         categories = initData.initCategories();
         questions = initData.initQuestions();
-        Random random = new Random();
+        // Random random = new Random();
         // for (int i = 0; i < 3; i++) {
         // Category category = new Category(UUID.randomUUID().toString());
         // categories.insert(category.getId(), category);
@@ -343,9 +342,10 @@ public class Main {
         int temp = 0;
         while (temp < size) {
             Question question = questions.get(random.nextInt(sizeOfTable));
-            if (!linkedList.contains(question)) {
+            if (!linkedList.contains(question) && question != null) {
                 linkedList.add(question);
                 temp++;
+                // System.out.println(question);
             }
         }
         return linkedList;

@@ -11,8 +11,6 @@ public class InitData {
     private HashTableADT<Integer, Category> categories = new HashTableImpl<>(10);
     private HashTableADT<Integer, Player> players = new HashTableImpl<>();
 
-
-
     public HashTableADT<Integer, Category> initCategories() {
         Category category1 = new Category("Xa hoi");
         Category category2 = new Category("Cong nghe");
@@ -43,8 +41,26 @@ public class InitData {
         Question question9 = new Question(caId2,
                 "Trong cau truc du lieu danh sach lien ket don, mot node gom bao nhieu thanh phan ?", "3", "1", "2",
                 "0", 3);
-        Question question10 = new Question(caId2, "Co che hoat dong cua STACK ?", "FIFO", "LIFO", "Ca 2 deu dung",
+        Question question10 = new Question(caId2, "Nuoc nao co dien tich lon nhat the gioi ?", "Nga", "My",
+                "Trung Quoc",
+                "Viet Nam", 1);
+
+        Question question11 = new Question(caId1, "Nuoc nao dong dan nhat the gioi ?", "An do", "My", "Trung Quoc",
+                "Viet Nam", 3);
+
+        Question question12 = new Question(caId1, "Hang dong lon nhat the gioi thuoc quoc gia nao ?", "Nga", "Viet Nam",
+                "Trung Quoc",
+                "An Do", 2);
+        Question question13 = new Question(caId2, "Dau la doi tuong ?", "May tinh", "Di hoc", "Ca 2 deu dung",
                 "Ca 2 deu sai", 1);
+
+        Question question14 = new Question(caId2, "Khi khai bao va xay dung lop ta can chu y den gi ?", "Thuoc tinh",
+                "Phuong thuc", "Ca 2 deu dung",
+                "Ca 2 deu sai", 3);
+
+        Question question15 = new Question(caId2, "Trong ke thua, lop cha goi la gi ?", "Drived Class", "Object Class",
+                "Base Class",
+                "Inheritance Class", 3);
         questions.insert(question1.getId(), question1);
         questions.insert(question2.getId(), question2);
         questions.insert(question3.getId(), question3);
@@ -55,16 +71,20 @@ public class InitData {
         questions.insert(question8.getId(), question8);
         questions.insert(question9.getId(), question9);
         questions.insert(question10.getId(), question10);
+        questions.insert(question11.getId(), question11);
+        questions.insert(question12.getId(), question12);
+        questions.insert(question13.getId(), question13);
+        questions.insert(question14.getId(), question14);
+        questions.insert(question15.getId(), question15);
         return questions;
     }
 
-
-    public static void main(String[] args) {
-        InitData initData = new InitData();
-        HashTableADT<Integer, Category> categories = initData.initCategories();
-        categories.values().display();
-        System.out.println();
-        HashTableADT<Integer, Question> questions = initData.initQuestions();
-        questions.values().display();
-    }
+    // public static void main(String[] args) {
+    //     InitData initData = new InitData();
+    //     HashTableADT<Integer, Category> categories = initData.initCategories();
+    //     categories.values().display();
+    //     System.out.println();
+    //     HashTableADT<Integer, Question> questions = initData.initQuestions();
+    //     questions.values().display();
+    // }
 }
