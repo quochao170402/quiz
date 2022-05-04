@@ -120,23 +120,24 @@ public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
 
     @Override
     public T remove(Node<T> node) {
-        if (node.getPrev() == null)
-            removeFirst();
-        if (node.getNext() == null)
-            removeLast();
+        if (node.getPrev() == null) {
+            return removeFirst();
+        } else if (node.getNext() == null) {
+            return removeLast();
+        } else {
+            node.getPrev().setNext(node.getNext());
+            node.getNext().setPrev(node.getPrev());
+            T data = node.getData();
+            size--;
 
-        node.getPrev().setNext(node.getNext());
-        node.getNext().setPrev(node.getPrev());
+            node.setData(null);
+            node.setNext(null);
+            node.setPrev(null);
+            node = null;
 
-        T data = node.getData();
-        size--;
+            return data;
+        }
 
-        node.setData(null);
-        node.setNext(null);
-        node.setPrev(null);
-        node = null;
-
-        return data;
     }
 
     @Override

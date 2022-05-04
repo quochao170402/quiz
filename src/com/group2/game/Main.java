@@ -14,7 +14,7 @@ import com.group2.models.Question;
 import com.group2.utils.Sorter;
 
 public class Main {
-    private HashTableADT<Integer, Question> questions = new HashTableImpl<>(97);
+    private HashTableADT<Integer, Question> questions = new HashTableImpl<>(10);
     private HashTableADT<Integer, Category> categories = new HashTableImpl<>(7);
     private HashTableADT<Integer, Player> players = new HashTableImpl<>();
     private Sorter sorter = new Sorter();
@@ -391,7 +391,7 @@ public class Main {
             System.out.println(question.display());
             String answer = null;
             do {
-                System.out.print("Your answser: ");
+                System.out.print("Your answer: ");
                 answer = scan.nextLine();
                 
                 if (!isNumber(answer)) {
@@ -409,6 +409,7 @@ public class Main {
             if (question.getCorrectAnswer() == Integer.parseInt(answer)) {
                 score += 10;
             }
+            
             node = node.getNext();
         }
         long end = System.currentTimeMillis();

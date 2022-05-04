@@ -68,6 +68,7 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
             if (node.getKey().equals(key))
                 return true;
         }
+
         return false;
     } // O(n)
 
@@ -140,6 +141,7 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
                 return node.getValue();
             }
         }
+        
         return null;
     }
 
