@@ -1,0 +1,56 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "QUIZ_dff58fad"
+        },
+        {
+            "type": "java",
+            "name": "Launch Test",
+            "request": "launch",
+            "mainClass": "com.group2.dsa.hashtable.Test",
+            "projectName": "QUIZ_dff58fad"
+        },
+        {
+            "type": "java",
+            "name": "Launch Demo",
+            "request": "launch",
+            "mainClass": "com.group2.dsa.lcs.Demo",
+            "projectName": "QUIZ_dff58fad"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestLinkedList",
+            "request": "launch",
+            "mainClass": "com.group2.dsa.linkedlist.TestLinkedList",
+            "projectName": "QUIZ_dff58fad"
+        },
+        {
+            "type": "java",
+            "name": "Launch Demo(1)",
+            "request": "launch",
+            "mainClass": "com.group2.game.Demo",
+            "projectName": "QUIZ_dff58fad"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "com.group2.game.Main",
+            "projectName": "QUIZ_dff58fad"
+        }
+    ]
+}

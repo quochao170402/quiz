@@ -47,6 +47,7 @@ public class HashTableImpl<K, V> implements HashTableADT<K, V> {
     // Clear all doubly linked list
     @Override
     public void clear() {
+        
         for (int i = 0; i < capacity; i++) {
             table[i].clear();
         }

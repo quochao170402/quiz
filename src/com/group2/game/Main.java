@@ -1,7 +1,10 @@
 package com.group2.game;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.UUID;
 
 import com.group2.dsa.hashtable.HashTableADT;
 import com.group2.dsa.hashtable.HashTableImpl;
@@ -33,25 +36,25 @@ public class Main {
         questions = initData.initQuestions();
         // Random random = new Random();
         // for (int i = 0; i < 3; i++) {
-        // Category category = new Category(UUID.randomUUID().toString());
-        // categories.insert(category.getId(), category);
+        //     Category category = new Category(UUID.randomUUID().toString());
+        //     categories.insert(category.getId(), category);
         // }
 
         // for (int i = 0; i < 20; i++) {
-        // Question question = new Question(random.nextInt(3),
-        // UUID.randomUUID().toString(),
-        // UUID.randomUUID().toString(),
-        // UUID.randomUUID().toString(), UUID.randomUUID().toString(),
-        // UUID.randomUUID().toString(),
-        // random.nextInt(4) + 1);
-        // questions.insert(question.getId(), question);
+        //     Question question = new Question(random.nextInt(3),
+        //             UUID.randomUUID().toString(),
+        //             UUID.randomUUID().toString(),
+        //             UUID.randomUUID().toString(), UUID.randomUUID().toString(),
+        //             UUID.randomUUID().toString(),
+        //             random.nextInt(4) + 1);
+        //     questions.insert(question.getId(), question);
         // }
 
         // for (int i = 0; i < 50; i++) {
-        // Player player = new Player(UUID.randomUUID().toString(), random.nextInt(10) *
-        // 10,
-        // (long) random.nextInt(1000000));
-        // players.insert(player.getId(), player);
+        //     Player player = new Player(UUID.randomUUID().toString(), random.nextInt(10) *
+        //             10,
+        //             (long) random.nextInt(1000000));
+        //     players.insert(player.getId(), player);
         // }
     }
 
@@ -104,13 +107,7 @@ public class Main {
                     break;
 
                 case 3:
-                    Player foundPlayer = findRankingByPlayerName();
-                    if (foundPlayer != null) {
-                        System.out.println("Rank of player " + foundPlayer.getName() + ":");
-                        System.out.println(foundPlayer);
-                    } else {
-                        System.out.println("NOT FOUND PLAYER");
-                    }
+                    findRankingByPlayerName();
                     break;
 
                 case 4:
@@ -307,24 +304,77 @@ public class Main {
         return questions.values();
     }
 
-    private Player findRankingByPlayerName() {
+    private void findRankingByPlayerName() {
         System.out.println("Enter your name: ");
         String name = scan.nextLine();
-        Player player = rankingByName(name);
-        if (player == null) {
-            return null;
-        } else
-            return player;
+        rankingByName(name);
     }
 
-    private Player rankingByName(String name) {
-        for (Player player : players.values()) {
-            if (player.getName().equals(name)) {
-                return player;
+    private String lcs(String S1, String S2, int m, int n) {
+        int[][] lcsTable = new int[m + 1][n + 1];
+
+        // Building the mtrix in bottom-up way
+        for (int i = 0; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
+                if (i == 0 || j == 0)
+                    lcsTable[i][j] = 0;
+                else if (S1.charAt(i - 1) == S2.charAt(j - 1))
+                    lcsTable[i][j] = lcsTable[i - 1][j - 1] + 1;
+                else
+                    lcsTable[i][j] = Math.max(lcsTable[i - 1][j], lcsTable[i][j - 1]);
             }
         }
-        return null;
+
+        int index = lcsTable[m][n];
+        int temp = index;
+
+        char[] lcs = new char[index + 1];
+        lcs[index] = '\0';
+
+        int i = m, j = n;
+        while (i > 0 && j > 0) {
+            if (S1.charAt(i - 1) == S2.charAt(j - 1)) {
+                lcs[index - 1] = S1.charAt(i - 1);
+                i--;
+                j--;
+                index--;
+            }
+
+            else if (lcsTable[i - 1][j] > lcsTable[i][j - 1])
+                i--;
+            else
+                j--;
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (int k = 0; k <= temp; k++)
+            result.append(lcs[k]);
+
+        return result.toString().length() > 0 ? result.toString() : null;
     }
+
+    private void rankingByName(String name) {
+        DoublyLinkedList<Player> playerList = players.values();
+        int[][] resultArray = new int[playerList.size()][2];
+        String lcsString = null;
+        int i = 0;
+        for (Player player : playerList) {
+            String X = player.getName();
+            int m = name.length();
+            int n = X.length();
+            lcsString = lcs(name, X, m, n);
+            resultArray[i][0] = player.getId();
+            resultArray[i][1] = lcsString.length();
+            i++;
+        }
+        Arrays.sort(resultArray, (a, b) -> Integer.compare(b[1],a[1])); //decreasing order
+        for (int j = 0; j < resultArray.length; j++) {
+            System.out.println(players.get(resultArray[j][0]));
+        }
+    }
+
+
+
 
     private DoublyLinkedList<Player> displayRankings() {
         return players.values();
@@ -393,7 +443,7 @@ public class Main {
             do {
                 System.out.print("Your answer: ");
                 answer = scan.nextLine();
-                
+
                 if (!isNumber(answer)) {
                     System.out.println("Your answer wrong! answer must be number.");
                 } else {
@@ -409,7 +459,7 @@ public class Main {
             if (question.getCorrectAnswer() == Integer.parseInt(answer)) {
                 score += 10;
             }
-            
+
             node = node.getNext();
         }
         long end = System.currentTimeMillis();
@@ -418,5 +468,7 @@ public class Main {
         Player player = new Player(name, score, time);
         return player;
     }
+
+    
 
 }
